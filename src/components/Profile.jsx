@@ -10,3 +10,4 @@ export default function Profile( {image, name, title, isNew }) {
         </div>
     );
 }
+ 

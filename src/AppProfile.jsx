@@ -21,7 +21,7 @@ function AppProfile() {
         title='프론트엔드 개발자'
       />
 
-    </>
+    </> 
   )
 }
 export default AppProfile;
