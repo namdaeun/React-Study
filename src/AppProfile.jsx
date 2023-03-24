@@ -1,9 +1,19 @@
 import './App.css';
+import Avatar from './components/Avatar';
 import Profile from './components/Profile';
 
 function AppProfile() {
+  const handleClick = (event) => {
+    console.log(event);
+    alert('버튼이 클릭됨!');
+  };
   return (
     <>
+      <button onClick={handleClick}>버튼</button>
+      <Avatar 
+      image='https://mblogthumb-phinf.pstatic.net/MjAxOTAzMjhfMjY2/MDAxNTUzNzYxMTc2OTkw.9iYOi5inY6hQuj01WfFqCA7zUUaVI3pDB9F_JG2B2vcg.IYO-bdgich1tpiiMZOpZScfC_YTGzWmnMv7vQS-HJhAg.JPEG.topbody73/large.jpg?type=w800' 
+      isNew = {true} 
+      />
       <Profile 
         image='https://mblogthumb-phinf.pstatic.net/MjAxOTAzMjhfMjY2/MDAxNTUzNzYxMTc2OTkw.9iYOi5inY6hQuj01WfFqCA7zUUaVI3pDB9F_JG2B2vcg.IYO-bdgich1tpiiMZOpZScfC_YTGzWmnMv7vQS-HJhAg.JPEG.topbody73/large.jpg?type=w800'
         name='Thomas Bukovatz'
