@@ -1,37 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useReducer } from 'react';
+import personReducer from './reducer/person-reducer';
 
 export default function AppMentor() {
-    const [person, setPerson] = useState(initialPerson);
+    // const [person, setPerson] = useState(initialPerson);
+    const [person, dispatch] = useReducer(personReducer, initialPerson);
+    // useReducer은 객체를 새롭게 만들어나갈 로직이 담긴 함수와 초기값 전달
+    // dispatch -> 원하는 액션을 명령할 수 있음
+
     const handleUpdate = () => {
         const prev = prompt(`누구의 이름을 바꾸고 싶은가요?`);
         const current = prompt(`이름을 무엇으로 바꾸고 싶은가요?`);
-        setPerson((person) => ({
-            ...person, 
-            mentors: person.mentors.map((mentor) => {
-                if (mentor.name === prev) {
-                    return { ...mentor, name: current }; // 변경해야 하는 이름인 경우 덮어씌움
-                }
-                return mentor;  // 변경하고자 하는 값이 아닌 경우 그냥 반환
-            }),
-        }));
+        dispatch({type: 'updated', prev, current});
+        // 'updated'를 personReducer함수의 두 번째 인자 (action)에 전달
     };
     const handleAdd =() => {
         const name = prompt(`멘토의 이름은?`);
         const title = prompt(`멘토의 직함은?`);
-        setPerson((person) => ({
-            ...person, 
-            mentors: [...person.mentors, {name, title}],
-        }));
+        dispatch({type: 'added', name, title});
     };
     const handleDelete = () => {
         const name = prompt(`누구를 삭제하고 싶은가요?`);
-        setPerson((person) => ({
-            ...person, 
-            mentors: person.mentors.filter((mentor) => mentor.name !== name), 
-            // if (mentor.name !== name) {
-            //     return mentor; // 조건을 만족하는 mentor.name만으로 새 배열을 만듦
-            // }
-        }));
+        dispatch({type: 'deleted', name});
     };
     return (
         <div>
