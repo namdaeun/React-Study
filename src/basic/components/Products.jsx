@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import useProducts from '../../hooks/use-products';
 
 export default function Products() {
+  const [checked, setChecked] = useState(false);
   const [loading, error, products] = useProducts({ salesOnly: checked }); // 정보 가지고 옴
   // salesOnly인지 아닌지는 checked값으로 가져옴
-  const [checked, setChecked] = useState(false);
   const handleChange = () => setChecked((prev) => !prev);
 
   if (loading) return <p className='loader'></p> // 로딩 중인 경우
