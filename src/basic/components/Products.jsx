@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useProducts from '../../hooks/use-products';
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
+  const [loading, error, products] = useProducts({ salesOnly: checked }); // 정보 가지고 옴
+  // salesOnly인지 아닌지는 checked값으로 가져옴
   const [checked, setChecked] = useState(false);
   const handleChange = () => setChecked((prev) => !prev);
-  useEffect(() => { // useEffect 첫 번쨰 인자 : 콜백함수
-    fetch(`data/${checked ? 'sale_' : ''}products.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('🔥뜨끈한 데이터를 네트워크에서 받아옴');
-        setProducts(data);
-      });
-    return () => { // 컴포넌트가 unmount될 때
-      console.log('🧹 깨끗하게 청소하는 일들을 합니다.');
-    };
-  }, [checked]);  // checked가 변경될 때마다 useEffect가 실행되어야 한다고 알려줌
 
+  if (loading) return <p className='loader'></p> // 로딩 중인 경우
+  if (error) return <p>{error}</p> // 에러난 경우 에러 내용 출력
   return (
     <>
     <input id="checkbox" type="checkbox" value={checked} onChange={handleChange} />
